@@ -155,7 +155,7 @@ if search_btn:
         st.warning("⚠️ Bitte gib dein Profil oder deine Kenntnisse ein.")
     else:
         with st.spinner(f"Suche Stellenangebote für '{job_keyword}' im Umkreis von {radius_val} km um {city}..."):
-            jobs = fetch_jobs(job_keyword, city, radius_val, limit=10)
+            jobs = fetch_jobs(job_keyword, city, radius_val, limit=3)
         
         st.success(f"✅ Es wurden **{len(jobs)}** Stellenanzeigen ermittelt. KI analysiert nun dein Profil...")
         
