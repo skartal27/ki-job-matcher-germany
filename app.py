@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import json
+import time
 from google import genai
 from google.genai import types
 
@@ -104,7 +105,7 @@ def calculate_match(api_key: str, cv_text: str, job_title: str, job_city: str):
     """
     
     response = client.models.generate_content(
-        model="gemini-3.6-flash",
+        model="gemini-2.5-flash",
         contents=prompt,
         config=types.GenerateContentConfig(
             response_mime_type="application/json"
@@ -165,6 +166,8 @@ if search_btn:
             job_city = job.get("arbeitsort", {}).get("ort", city)
             ref_nr = job.get("refnr", "")
             external_url = f"https://www.arbeitsagentur.de/jobsuche/jobdetail/{ref_nr}"
+            
+            time.sleep(1.5)
             
             try:
                 analysis = calculate_match(gemini_key, cv_content, title, job_city)
