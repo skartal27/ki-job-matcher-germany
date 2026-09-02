@@ -118,11 +118,16 @@ st.caption("Finde passende Stellenanzeigen in deinem Umkreis mit automatischer K
 
 with st.sidebar:
     st.header("⚙️ Einstellungen & Profil")
-    gemini_key = st.text_input(
-        "Gemini API-Schlüssel", 
-        type="password",
-        help="Erstelle deinen kostenlosen Schlüssel auf https://aistudio.google.com"
-    )
+    
+    # Secrets içinde anahtar varsa onu alır, yoksa kullanıcıdan ister
+    if "GEMINI_API_KEY" in st.secrets:
+        gemini_key = st.secrets["GEMINI_API_KEY"]
+    else:
+        gemini_key = st.text_input(
+            "Gemini API-Schlüssel", 
+            type="password",
+            help="Erstelle deinen kostenlosen Schlüssel auf https://aistudio.google.com"
+        )
     
     st.subheader("Suchfilter")
     job_keyword = st.text_input("Suchbegriff / Beruf", value="SAP")
